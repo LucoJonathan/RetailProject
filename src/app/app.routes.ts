@@ -1,4 +1,8 @@
-import { Routes } from '@angular/router';
+import {ActivatedRouteSnapshot, RouterStateSnapshot, Routes} from '@angular/router';
+import {authGuard} from '../tools/auth.guard';
+import {ProductService} from '../service/product.service';
+import {catchError, of} from 'rxjs';
+import {inject} from '@angular/core';
 
 export const routes: Routes = [
   {
@@ -15,12 +19,16 @@ export const routes: Routes = [
   {
     // Home Page
     path: "home",
-    loadComponent: () => import('../pages/home/home.component').then(m => m.HomeComponent)
+    loadComponent: () => import('../pages/home/home.component').then(m => m.HomeComponent),
+
   },
   {
     // Shop Page
     path: "shop",
-    loadComponent: () => import('../pages/shop/shop.component').then(m => m.ShopComponent)
+    loadComponent: () => import('../pages/shop/shop.component').then(m => m.ShopComponent),
+    resolve: {
+      products : () => inject(ProductService).all()
+    }
   },
   {
     // Login Page
@@ -31,6 +39,19 @@ export const routes: Routes = [
     // Contact Page
     path: "contact",
     loadComponent: () => import('../pages/contact/contact.component').then(m => m.ContactComponent)
+  },
+  {
+    // ProductEditor Page
+    path: "product-editor/:id",
+    loadComponent: () => import('../pages/product-editor/product-editor.component')
+      .then(m => m.ProductEditorComponent),
+    canMatch: [authGuard],
+    resolve: {
+      product: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+        const id = +(route.paramMap.get('id') || 0); // ID take the value in path, convert in number or if nothing == 0
+        return id ? inject(ProductService).byId(id).pipe(catchError(() => of(undefined))) : undefined;
+      }
+    }
   },
   {
     path: "**", // Wildcard (toute valeur)

@@ -1,0 +1,10 @@
+<article>
+  <img src="PictureProducts/{{product.src}}"  alt=""/>
+  <h3>{{product.title}}</h3>
+  <p>{{product.description}}</p>
+  <ul class="actions">
+    <li><a routerLink="/editor/{{ product.id }}" class="button">Edit</a></li>
+    <li><button class="button" (click)="delete()">Delete</button></li>
+  </ul>
+</article>
+

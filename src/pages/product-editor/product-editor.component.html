@@ -1,0 +1,49 @@
+<div id="product-editor">
+  <div class="inner">
+    <div id="main" >
+      <h2 style="text-align: center; margin: 5% auto auto">Création d'un nouveau produit</h2>
+      <!-- Le form associe les val du composant avec le html-->
+      <form (submit)="onSubmit()" [formGroup]="form" style=" max-width: 60%; margin: 5% auto auto;">
+        <div style="margin-bottom: 10px ">
+
+          <input [class.invalid]="isInvalid('title')" formControlName="title" placeholder="Titre de l'article"
+                 type="text">
+          @if (hasError ( 'title' , 'required' )) {
+            <p>Le Titre de l'article est requis</p>
+          }
+        </div>
+        <div style="margin-bottom: 10px ">
+          <input [class.invalid]="isInvalid('price')" formControlName="price" placeholder="Prix de l'article"
+                 type="text">
+          @if (hasError ( 'price' , 'required' )) {
+            <p>Le prix de l'article est requis</p>
+          }
+        </div>
+        <div style="margin-bottom: 10px ">
+          <input [class.invalid]="isInvalid('description')" formControlName="description" placeholder="Description de l'article"
+                 type="text">
+          @if (hasError ( 'description' , 'required' )) {
+            <p>La description de l'article est requis</p>
+          }
+        </div>
+        <div style="margin-bottom: 10px; text-align: center">
+          <select formControlName="src">
+            <option value="null">Choisir l'image</option>
+            @for (pic of pics; track $index) {
+              <option [value]="pic">{{ pic }}</option>
+            }
+          </select>
+          <img alt="" src="PictureProducts/{{form.value.src}}" style="width: auto; height: auto; margin-top: 1% ">
+        </div>
+        <div class="row">
+          <div style="width: 50%">
+            <button class="button" style="background-color: red;" type="reset">Reset</button>
+          </div>
+          <div style="width: 50%; text-align: end">
+            <button class="button" style="background-color: dodgerblue;" type="submit" >Publier le produit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
