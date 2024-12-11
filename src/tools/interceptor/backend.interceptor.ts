@@ -1,9 +1,9 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import {environment} from '../environments/environment';
+import {environment} from '../../environments/environment';
 import {inject} from '@angular/core';
 
 import {catchError, throwError} from 'rxjs';
-import {AuthService} from '../service/auth.service';
+import {AuthService} from '../../service/auth.service';
 
 export const backendInterceptor: HttpInterceptorFn = (req, next) => {
   if (req.url.startsWith("/")) {

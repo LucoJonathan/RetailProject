@@ -3,11 +3,13 @@ import {FormsModule} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {AuthService} from '../../service/auth.service';
+import {HeaderComponent} from '../../components/header/header.component';
+import {FooterComponent} from '../../components/footer/footer.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, HeaderComponent, FooterComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -24,6 +26,10 @@ export class LoginComponent {
   private http: HttpClient = inject(HttpClient);
   private router: Router = inject(Router);
   private auth: AuthService = inject(AuthService);
+
+  handleRegister(){
+    this.router.navigate(['/register']);
+  }
 
   onSubmit(form: HTMLFormElement) {
     if(form.checkValidity()) {

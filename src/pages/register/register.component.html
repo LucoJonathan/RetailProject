@@ -1,0 +1,53 @@
+<div id="register">
+  <div class="inner">
+    <!-- Main -->
+    <div id="main">
+      <form (submit)="onSubmit()" [formGroup]="form">
+        <label> Identifiant :
+          <input [class.invalid]="isInvalid('username')" formControlName="username" type="text" >
+          <!-- Input for username-->
+          <!--Id username is invalid => showError-->
+          @if (form.get ( 'username' ); as username) {
+            @if ((username.touched || username.dirty) && username.invalid) {
+              <p>IDENTIFIANT REQUIS</p>
+            }
+          }
+        </label>
+        <label> Email :
+          <input [class.invalid]="isInvalid('email')" formControlName="email" type="email">
+          @if (isInvalid ( 'email' )) {
+            <p>EMAIL REQUIS</p>
+          }
+        </label>
+        <label> Mot de passe :
+          <input [class.invalid]="isInvalid('password')" formControlName="password" type="password">
+          @if (hasError ( 'password' , 'required' )) {
+            <p>MOT DE PASSE REQUIS</p>
+          }
+        </label>
+        <label> Confirmer mot de passe :
+          <input [class.invalid]="isInvalid(confirmPasswordControl)" [formControl]="confirmPasswordControl"
+                 type="password">
+          @if (hasError ( confirmPasswordControl , 'required' )) {
+            <p>MOT DE PASSE REQUIS</p>
+          }
+          @if (hasError ( confirmPasswordControl , 'mustmatch' )) {
+            <p>LES MOTS DE PASSE DOIVENT ETRE IDENTIQUE</p>
+          }
+        </label>
+        <ul class="actions">
+          <li>
+            <button class="button" type="submit">Send</button>
+          </li>
+          <li>
+            <button class="button" type="reset">Reset</button>
+          </li>
+        </ul>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+

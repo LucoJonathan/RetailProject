@@ -1,0 +1,14 @@
+<!-- Nav -->
+<nav id="nav">
+  <ul>
+    <li><a routerLink="/home" ><span class="icon solid fa-home">Accueil</span></a></li>
+    <li><a routerLink="/shop"><span class="icon solid fa-th">Magasin</span></a></li>
+    @if(!auth.isLogged){
+      <li><a routerLink="/login"><span class="icon solid fa-user">Login</span></a></li>
+    }
+    @if (auth.isLogged){
+      <li><a routerLink="/myAccount"><span class="icon solid fa-user">Mon Compte</span></a></li>
+      <li><a routerLink="/contact"><span class="icon solid fa-envelope">Contact</span></a></li>
+    }
+  </ul>
+</nav>

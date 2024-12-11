@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
-import {User} from '../views/register/register.component';
 import {BehaviorSubject, Observable, tap} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
+import {User} from '../pages/register/register.component';
 import {Router} from '@angular/router';
 
 @Injectable({
